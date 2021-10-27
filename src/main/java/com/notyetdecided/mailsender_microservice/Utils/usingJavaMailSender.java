@@ -1,10 +1,10 @@
 package com.notyetdecided.mailsender_microservice.Utils;
 
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
-import org.springframework.stereotype.Component;
+import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
 
-@Component
+
 public interface usingJavaMailSender {
-    boolean sendMail(AccountDTO accountDTO,String [] strings);
+    boolean sendMail(AccountDTO accountDTO, EmailDetails emailDetails);
 
 }
