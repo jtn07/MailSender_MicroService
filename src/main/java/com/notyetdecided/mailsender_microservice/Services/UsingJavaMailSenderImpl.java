@@ -1,9 +1,9 @@
-package com.notyetdecided.mailsender_microservice.Utils;
+package com.notyetdecided.mailsender_microservice.Services;
 
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
-import com.sun.mail.iap.Response;
+import com.notyetdecided.mailsender_microservice.Services.usingJavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;

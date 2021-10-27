@@ -1,7 +1,8 @@
-package com.notyetdecided.mailsender_microservice.Utils;
+package com.notyetdecided.mailsender_microservice.Services;
 
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
+import com.notyetdecided.mailsender_microservice.Services.SendGridService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -11,13 +12,12 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
-public class SendGridServiceImpl implements SendGridService{
+public class SendGridServiceImpl implements SendGridService {
 
 
     @Autowired

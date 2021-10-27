@@ -2,10 +2,6 @@ package com.notyetdecided.mailsender_microservice.Services;
 
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
-import com.notyetdecided.mailsender_microservice.Utils.SendGridService;
-import com.notyetdecided.mailsender_microservice.Utils.SendGridServiceImpl;
-import com.notyetdecided.mailsender_microservice.Utils.usingJavaMailSender;
-import com.sendgrid.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
