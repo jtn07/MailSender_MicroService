@@ -1,8 +1,8 @@
 package com.notyetdecided.mailsender_microservice.Services;
 
+import com.notyetdecided.mailsender_microservice.Configurations.SendGridConfig;
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
-import com.notyetdecided.mailsender_microservice.Services.SendGridService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -17,26 +17,28 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class SendGridServiceImpl implements SendGridService {
+public class SendGridServiceImpl implements MailSenderService {
 
 
     @Autowired
     private SendGrid sendGrid;
 
-    @Value("${mail.key}")
-    private String key;
-    @Value("${app.fromMail}")
-    private String fromMail ;
-    @Override
-    public boolean sendMail(AccountDTO accountDTO, EmailDetails emailDetails) throws IOException {
+    @Autowired
+    private SendGridConfig sendGridConfig;
 
+
+    @Value("${spring.sendgrid.api-key}")
+   private String key;
+    @Value("${spring.mail.username}")
+   private String fromMail ;//sendGridConfig.fromMail;
+    @Override
+    public boolean sendMail(AccountDTO accountDTO, EmailDetails emailDetails)  {
         Email from =new Email(fromMail);
         String subject = emailDetails.getSubject();
         Email to = new Email(accountDTO.getEmailAddress());
         String con= emailDetails.getBody();
         Content content = new Content("text/plain", con+"\n sent from SendGrid");
         Mail mail = new Mail(from, subject, to, content);
-
         SendGrid sendGrid = new SendGrid(key);
         Request request = new Request();
         Response response= null;
@@ -47,7 +49,7 @@ public class SendGridServiceImpl implements SendGridService {
              response = sendGrid.api(request);
 
         } catch (IOException ex) {
-            throw ex;
+            return false;
         }
         if(response.getStatusCode() != 200)
             return false;

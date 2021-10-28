@@ -11,20 +11,16 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/mail")
 public class mailController {
-    @Value("${app.success}")
-    static String success;
-    @Value("${app.fail}")
-    static String fail;
 
     @Autowired
     private emailServiceDecider emailServiceDecider;
 
     @GetMapping("/account/{AccountDTO}")
     public String sendMail(@ModelAttribute("AccountDTO") AccountDTO accountDTO) throws IOException {
-
        boolean decider= emailServiceDecider.decideEmailService(accountDTO);
-       if(decider)
-           return success;
-        return fail;
+       if(decider) {
+           return "Mail sent Successfully";
+       }
+        return "Mail service failed";
     }
 }

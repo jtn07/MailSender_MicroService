@@ -3,7 +3,6 @@ package com.notyetdecided.mailsender_microservice.Services;
 import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
-import com.notyetdecided.mailsender_microservice.Services.usingJavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,13 +13,12 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class UsingJavaMailSenderImpl implements usingJavaMailSender {
+public class JavaMailSenderImpl implements MailSenderService {
 
 
     @Autowired
     private JavaMailSender javaMailSender;
 
-    private AccountDTO accountDTO;
 
     @Override
     public boolean sendMail(AccountDTO accountDTO, EmailDetails emailDetails) {

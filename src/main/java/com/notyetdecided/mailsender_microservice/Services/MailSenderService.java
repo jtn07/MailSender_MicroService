@@ -4,7 +4,7 @@ import com.notyetdecided.mailsender_microservice.DTOs.AccountDTO;
 import com.notyetdecided.mailsender_microservice.DTOs.EmailDetails;
 
 
-public interface usingJavaMailSender {
+public interface MailSenderService {
     boolean sendMail(AccountDTO accountDTO, EmailDetails emailDetails);
 
 }

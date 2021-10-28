@@ -6,22 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalTime;
+
 @Service
 public class emailServiceDeciderImpl implements emailServiceDecider {
 
+    @Autowired
+    private JavaMailSenderImpl usingJavaMailSender;
 
     @Autowired
-    private SendGridServiceImpl sendGridService;
-
-    @Autowired
-   private usingJavaMailSender usingJavaSender;
-
+    private SendGridServiceImpl sendGridServiceImpl;
     @Override
     public boolean decideEmailService(AccountDTO accountDTO) throws IOException {
-        if(usingJavaSender.sendMail(accountDTO,getEmailDetails(accountDTO)))
+        if(usingJavaMailSender.sendMail(accountDTO,getEmailDetails(accountDTO)))
         return true;
-        else if(sendGridService.sendMail(accountDTO,getEmailDetails(accountDTO))){
+        else if(sendGridServiceImpl.sendMail(accountDTO,getEmailDetails(accountDTO))){
             return true;
         }
         return false;
@@ -29,8 +27,8 @@ public class emailServiceDeciderImpl implements emailServiceDecider {
     @Override
     public EmailDetails getEmailDetails(AccountDTO accountDTO) {
          String subject="ICICI Bank Account update on "+java.time.LocalDate.now();
-         String body= "Your Account xxxx"+accountDTO.getAccountEndingDigits() +" is "+accountDTO.getAccountBalance()
-                 +" at "+ LocalTime.now()+".";
+         String body= "Your Account Balance for account ending with xxxx"+accountDTO.getAccountEndingDigits() +" is "+accountDTO.getAccountBalance()
+                 +".";
          return new EmailDetails(subject,body);
     }
 }
